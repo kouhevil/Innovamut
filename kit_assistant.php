@@ -33,7 +33,7 @@
                         <a class="nav-link" href="index.php">Accueil</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="kit_assistant.php">Accueil</a>
+                        <a class="nav-link active" href="kit_assistant.php">Kit assistant</a>
                     </li>
             </div>
         </div>

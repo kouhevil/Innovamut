@@ -28,7 +28,7 @@
                         <a class="nav-link active" aria-current="page" href="index.php">Accueil</a>
                     </li>
                     <li class="nav-item ">
-                        <a class="nav-link " href="kit_assistant.php">Accueil</a>
+                        <a class="nav-link " href="kit_assistant.php">Kit assistant</a>
                     </li>
             </div>
         </div>
