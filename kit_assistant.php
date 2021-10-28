@@ -12,6 +12,8 @@ if (isset($_POST['valider'])) {
     $repexist = $req->rowCount();
     $rep = $req->fetch();
 
+    var_dump($repexist);
+
     if($repexist > 0){
         $result = $rep['reponse'];
     }
@@ -86,7 +88,7 @@ if (isset($_POST['valider'])) {
     <?php 
         if(isset($result)) {
     ?>
-    <div class="container card mt-3 mb-3">
+    <div class="container card mb-3">
         <div class="container card-body">
             <p class="text_secondary"> <?php echo $result; ?> </p>
         </div>
