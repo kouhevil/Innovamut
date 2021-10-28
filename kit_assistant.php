@@ -1,6 +1,24 @@
-<?php 
-    require 'db-config.php';
-    session_start();
+<?php
+require 'db-config.php';
+
+if (isset($_POST['valider'])) {
+    $mot_cle = htmlspecialchars($POST['valider']);
+
+    $conn = new PDO($db_dsn, $db_user, $db_pass);
+
+    $sql = "SELECT * FROM `dialogue_chatbots` WHERE `mot_cle`=?";
+    $req = $conn->prepare($sql);
+    $req->execute(array($mot_cle));
+    $repexist = $req->rowCount();
+    $rep = $req->fetch();
+
+    if($repexist > 0){
+        $result = $rep['reponse'];
+    }
+    else
+        $result = 'Pas de résultat pour ce mot clé !';
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -39,13 +57,42 @@
         </div>
     </nav>
 
-    <div class="container my-3">
-        <h1 class="h1 text-secondary mb-b">Kit assistant </h1>
-        
-        <form action="">
-            
+    <div class="container my-3 mb-3">
+        <h1 class="h1 text-secondary mb-3">Kit assistant </h1>
+
+        <form action="" method="POST">
+            <div class="mb-3 row">
+                <label for="mot_cle" class="col-sm-2 col-form-label">Votre question ?</label>
+                <div class="col-sm-10">
+                    <div class="col-md">
+                        <div class="form-floating">
+                            <select class="form-select form-select-sm" id="mot_cle" aria-label="Mot_cle" name="mot_cle">
+                                <option value="Vaccination">Vaccination</option>
+                                <option value="Mammographie">Mammographie</option>
+                                <option value="Coloscopie">Coloscopie</option>
+                                <option value="Col de l'utérus(papillomavirus)">Col de l'utérus(papillomavirus)</option>
+                            </select>
+                            <label for="floatingSelectGrid">Selectionnez un mot clé</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <input type="submit" value="Valider" name="valider" class="btn btn-outline-success float-start">
+            </div>
         </form>
     </div>
+
+    <?php 
+        if(isset($result)) {
+    ?>
+    <div class="container card mb-3">
+        <div class="container card-body">
+            <p class="text_secondary"> <?php echo $result; ?> </p>
+        </div>
+    </div>
+    <?php }  ?>
 </body>
 
 </html>
