@@ -1,7 +1,16 @@
 <?php
+require 'db-config.php';
 
-if(isset($_POST['valider'])){
-    
+try {
+    $bdd = new PDO($DB_HOST, $DB_USER, $DB_PASS);
+
+    $insert_inscrit = $bdd->prepare("INSERT INTO test VALUES (?)");
+    $insert_inscrit->execute(array('ça marche'));
+} catch (PDOException $pe) {
+    $msg_error = $pe->getMessage();
+}
+
+if (isset($_POST['valider'])) {
 }
 
 ?>
@@ -29,13 +38,13 @@ if(isset($_POST['valider'])){
 
     <!-- Formulaire -->
     <div class="mt-3 mb-3 card">
-        <?php if(isset($msg_error)){  ?> 
-        <div class="container mt-3">
-            <div class="alert alert-warning alert-dismissible fade show" role="alert">
-            <?php echo $msg_error; ?>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        <?php if (isset($msg_error)) {  ?>
+            <div class="container mt-3">
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <?php echo $msg_error; ?>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
             </div>
-        </div>
         <?php }  ?>
 
         <div class="card-body">
@@ -44,35 +53,45 @@ if(isset($_POST['valider'])){
                 <div class="mb-2 row">
                     <label for="nom" class="col-sm-2 col-form-label">Nom</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control form-control-sm" id="nom" name="nom" value="<?php if(isset($nom)) {echo $nom;}?>" >
+                        <input type="text" class="form-control form-control-sm" id="nom" name="nom" value="<?php if (isset($nom)) {
+                                                                                                                echo $nom;
+                                                                                                            } ?>">
                     </div>
                 </div>
 
                 <div class="mb-2 row">
                     <label for="prenom" class="col-sm-2 col-form-label">Prenom</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control form-control-sm" id="prenom" name="prenom" value="<?php if(isset($prenom)){ echo $prenom;} ?>" >
+                        <input type="text" class="form-control form-control-sm" id="prenom" name="prenom" value="<?php if (isset($prenom)) {
+                                                                                                                        echo $prenom;
+                                                                                                                    } ?>">
                     </div>
                 </div>
 
                 <div class="mb-2 row">
                     <label for="poids" class="col-sm-2 col-form-label">Poids(en kg)</label>
                     <div class="col-sm-8">
-                        <input type="number" min="1" class="form-control form-control-sm" id="poids" name="poids" value="<?php if(isset($poids)) {echo $poids;}?>" >
+                        <input type="number" min="1" class="form-control form-control-sm" id="poids" name="poids" value="<?php if (isset($poids)) {
+                                                                                                                                echo $poids;
+                                                                                                                            } ?>">
                     </div>
                 </div>
 
                 <div class="mb-2 row">
                     <label for="taille" class="col-sm-2 col-form-label">Taille(en cm)</label>
                     <div class="col-sm-8">
-                        <input type="number" min="1" class="form-control form-control-sm" id="taille" name="taille" value="<?php if(isset($taille)) {echo $taille;}?>" >
+                        <input type="number" min="1" class="form-control form-control-sm" id="taille" name="taille" value="<?php if (isset($taille)) {
+                                                                                                                                echo $taille;
+                                                                                                                            } ?>">
                     </div>
                 </div>
 
                 <div class="mb-2 row">
                     <label for="age" class="col-sm-2 col-form-label">Age</label>
                     <div class="col-sm-8">
-                        <input type="number" min="1" class="form-control form-control-sm" id="age" name="age" value="<?php if(isset($age)) {echo $age;}?>" >
+                        <input type="number" min="1" class="form-control form-control-sm" id="age" name="age" value="<?php if (isset($age)) {
+                                                                                                                            echo $age;
+                                                                                                                        } ?>">
                     </div>
                 </div>
 
@@ -80,7 +99,7 @@ if(isset($_POST['valider'])){
                     <label class="col-sm-2 col-form-label">Sexe</label>
                     <div class="col-sm-10">
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="sexe" id="s_masculin" value="M" >
+                            <input class="form-check-input" type="radio" name="sexe" id="s_masculin" value="M">
                             <label class="form-check-label" for="s_masculin">Masculin</label>
                         </div>
                         <div class="form-check form-check-inline">
@@ -95,7 +114,9 @@ if(isset($_POST['valider'])){
                     <div class="col-sm-10">
                         <div class="col-md">
                             <div class="form-floating">
-                                <select class="form-select form-select-sm" id="region" aria-label="Region" name="region" value="<?php if(isset($region)) {echo $region;}?>" >
+                                <select class="form-select form-select-sm" id="region" aria-label="Region" name="region" value="<?php if (isset($region)) {
+                                                                                                                                    echo $region;
+                                                                                                                                } ?>">
                                     <option value="rouen">Rouen</option>
                                     <option value="paris">Paris</option>
                                     <option value="rennes">Rennes</option>
@@ -112,7 +133,7 @@ if(isset($_POST['valider'])){
                 <div class="mb-3 row">
                     <label for="email" class="col-sm-2 col-form-label">Email</label>
                     <div class="col-sm-10">
-                        <input type="email" class="form-control form-control-sm" id="email" name="email" placeholder="mdo@example.com" value="<?php if(isset($email)) echo $email;?>" >
+                        <input type="email" class="form-control form-control-sm" id="email" name="email" placeholder="mdo@example.com" value="<?php if (isset($email)) echo $email; ?>">
                     </div>
                 </div>
 
@@ -124,7 +145,9 @@ if(isset($_POST['valider'])){
                 <div class="mb-3 row">
                     <label for="idMat" class="col-sm-2 col-form-label">N° d'adhérent MATMUT</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control form-control-sm" id="idMat" name="idMat" placeholder="Entrez votre n° adhérent de la MATMUT" value="<?php if(isset($idMat)) {echo $idMat;}?>">
+                        <input type="text" class="form-control form-control-sm" id="idMat" name="idMat" placeholder="Entrez votre n° adhérent de la MATMUT" value="<?php if (isset($idMat)) {
+                                                                                                                                                                        echo $idMat;
+                                                                                                                                                                    } ?>">
                     </div>
                 </div>
 
