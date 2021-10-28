@@ -13,8 +13,6 @@ if (isset($_POST['valider'])) {
     $repexist = $req->rowCount();
     $rep = $req->fetch();
 
-    var_dump($repexist);
-
     if ($repexist > 0) {
         $result = $rep['reponse'];
     } else
@@ -28,7 +26,7 @@ if (isset($_POST['valider'])) {
 
 <head>
     <meta charset="utf-8">
-    <title>Page d'accueil - Innovamut</title>
+    <title>Kit assistant- Innovamut</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
@@ -84,6 +82,9 @@ if (isset($_POST['valider'])) {
             </div>
         </form>
     </div>
+
+    <br>
+
 
 
     <div class="mt-3">
