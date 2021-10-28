@@ -2,22 +2,22 @@
 require 'db-config.php';
 
 if (isset($_POST['valider'])) {
-    $mot_cle = htmlspecialchars($POST['mot_cle']);
+    $mot_cle = htmlspecialchars($_POST['mot_cle']);
 
     $conn = new PDO($db_dsn, $db_user, $db_pass);
 
     $sql = "SELECT * FROM `dialogue_chatbots` WHERE `mot_cle`= ?";
     $req = $conn->prepare($sql);
     $req->execute(array($mot_cle));
+
     $repexist = $req->rowCount();
     $rep = $req->fetch();
 
     var_dump($repexist);
 
-    if($repexist > 0){
+    if ($repexist > 0) {
         $result = $rep['reponse'];
-    }
-    else
+    } else
         $result = 'Pas de résultat pour ce mot clé !';
 }
 
@@ -79,21 +79,25 @@ if (isset($_POST['valider'])) {
                 </div>
             </div>
 
-            <div class="mb-3">
+            <div>
                 <input type="submit" value="Valider" name="valider" class="btn btn-outline-success float-start">
             </div>
         </form>
     </div>
 
-    <?php 
-        if(isset($result)) {
-    ?>
-    <div class="container card mb-3">
-        <div class="container card-body">
-            <p class="text_secondary"> <?php echo $result; ?> </p>
-        </div>
+
+    <div class="mt-3">
+        <?php
+        if (isset($result)) {
+        ?>
+            <div class="container card">
+                <div class="container card-body">
+                    <p class="text_secondary"> <?php echo $result; ?> </p>
+                </div>
+            </div>
+        <?php }  ?>
     </div>
-    <?php }  ?>
+
 </body>
 
 </html>
