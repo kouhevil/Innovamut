@@ -26,10 +26,10 @@ try {
                 $idMat = htmlspecialchars($_POST['idMat']);
         }
         // Requête mysql pour insérer des données
-        $sql = "INSERT INTO personnes ('nom', 'prenom', 'poids', 'taille', 'age', 'sexe' , 'region' , 'email' , 'idMat' ) 
+        $sql = "INSERT INTO personnes ('nom', 'prenom', 'poids', 'taille', 'age', 'sexe' , 'region' , 'email' , 'numero_matmut' ) 
                     VALUES (:nom, :prenom, :poids, :taille, :age, :sexe, :region, :email, :idMat)";
         $res = $conn->prepare($sql);
-        $exec = $res->execute(array(":nom" => $nom, ":prenom" => $prenom, ":poids" => $poids, ":taille" => $taille, ":age" => $age, ":sexe" => $sexe, ":region" => $region, ":email" => $email, ":idMatmut" => $idMat));
+        $exec = $res->execute(array(":nom" => $nom, ":prenom" => $prenom, ":poids" => $poids, ":taille" => $taille, ":age" => $age, ":sexe" => $sexe, ":region" => $region, ":email" => $email, ":numero_matmut" => $idMat));
         // vérifier si la requête d'insertion a réussi
         if ($exec) {
             $_SESSION['msg_suc'] = 'Données insérées avec succès !';
