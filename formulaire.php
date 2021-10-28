@@ -251,7 +251,7 @@ try {
         var socMat = document.getElementById("socMat");
         var mat = document.getElementById("mat");        
 
-        if (socMat.getAttribute("checked") == true) {
+        if (socMat.checked == true) {
             mat.hidden = false;
         } else {
             mat.hidden = true;
