@@ -20,27 +20,16 @@ try {
         $idMat = null;
 
         if ($_POST['consentement'] == true) {
-            if (empty($_POST['idMat']))
+            if (empty($_POST['idMat']) || $idMat == null)
                 $msg_error = 'Si vous nous autoriser à utiliser vos données, vous devez entrez votre n° adhérent de la MATMUT !';
-            else {
+            else 
                 $idMat = htmlspecialchars($_POST['idMat']);
-                // Requête mysql pour insérer des données
-                $sql = "INSERT INTO personnes ('nom', 'prenom', 'poids', 'taille', 'age', 'sexe' , 'region' , 'email' , 'idMatmut' ) VALUES (?,?,?,?,?,?,?,?)";
-                $res = $conn->prepare($sql);
-                $exec = $res->execute(array($nom, $prenom, $poids, $taille, $age, $sexe, $region, $email, $idMat));
-                // vérifier si la requête d'insertion a réussi
-                if ($exec) {
-                    $_SESSION['msg_suc'] = 'Données insérées avec succès !';
-                    header("Location:prediction.php");
-                } else {
-                    $msg_error = "Échec de l'opération d'insertion";
-                }
-            }
-        } else {
+        } 
             // Requête mysql pour insérer des données
-            $sql = "INSERT INTO personnes ('nom', 'prenom', 'poids', 'taille', 'age', 'sexe' , 'region' , 'email' , 'idMatmut' ) VALUES (?,?,?,?,?,?,?,?)";
+            $sql = "INSERT INTO personnes ('nom', 'prenom', 'poids', 'taille', 'age', 'sexe' , 'region' , 'email' , 'idMatmut' ) 
+                    VALUES (:nom, :prenom, :poids, :taille, :age, :sexe, , :region, :email, :idMat)";
             $res = $conn->prepare($sql);
-            $exec = $res->execute(array($nom, $prenom, $poids, $taille, $age, $sexe, $region, $email, $idMat));
+            $exec = $res->execute(array(":nom"=>$nom, ":prenom"=>$prenom, ":poids"=>$poids, ":taille"=>$age, ":sexe"=>$sexe, ":region"=>$region, ":email"=>$email, ":idMatmut"=>$idMat));
             // vérifier si la requête d'insertion a réussi
             if ($exec) {
                 $_SESSION['msg_suc'] = 'Données insérées avec succès !';
@@ -48,7 +37,7 @@ try {
             } else {
                 $msg_error = "Échec de l'opération d'insertion";
             }
-        }
+        
     } else {
         $msg_error = 'Vous devez remplir tous les champs requis !';
     }
