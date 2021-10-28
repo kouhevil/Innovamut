@@ -4,33 +4,47 @@ require 'db-config.php';
 try {
     $conn = new PDO($db_dsn, $db_user, $db_pass);
     // set the PDO error mode to exception
-    echo "Connected successfully";
+    //echo "Connected successfully";
 
-    /*if (isset($_POST['valider'])) {
-        $nom = htmlspecialchars($_POST['nom']);
-        // Requête mysql pour insérer des données
-        $sql = "INSERT INTO `test` VALUES (:nom)";
-        $res = $pdo->prepare($sql);
-        $exec = $res->execute(array(":nom" => $nom));
-        // vérifier si la requête d'insertion a réussi
-        if ($exec) {
-            echo 'Données insérées';
-        } else {
-            echo "Échec de l'opération d'insertion";
+    if (isset($_POST['valider'])) {
+        if (empty($_POST['nom']) || empty($_POST['prenom']) || empty($_POST['poids']) || empty($_POST['taille']) || empty($_POST['age']) || empty($_POST['region']) || empty($_POST['email']))
+            $msg_error = 'Vous devez remplir tous mes champs requis !';
+
+        else {
+            $nom = htmlspecialchars($_POST['nom']);
+            $prenom = htmlspecialchars($_POST['prenom']);
+            $poids = htmlspecialchars($_POST['poids']);
+            $taille = htmlspecialchars($_POST['taille']);
+            $age = htmlspecialchars($_POST['age']);
+            $sexe = htmlspecialchars($_POST['sexe']);
+            $region = htmlspecialchars($_POST['region']);
+            $email = htmlspecialchars($_POST['email']);
+            $idMat = null;
+
+            if ($_POST['consentement'] == true) {
+                if (empty($_POST['idMat']))
+                    $msg_error = 'Si vous nous autoriser à utiliser vos données, vous devez entrez votre n° adhérent de la MATMUT !';
+                else {
+                    $idMat = htmlspecialchars($_POST['idMat']);
+                }
+            }
+
+            // Requête mysql pour insérer des données
+            $sql = "INSERT INTO personnes ('nom', 'prenom', 'poids', 'taille', 'age', 'sexe' , 'region' , 'email' , 'idMatmut' ) VALUES (?,?,?,?,?,?,?,?)";
+            $res = $pdo->prepare($sql);
+            $exec = $res->execute(array($nom, $prenom, $poids, $taille, $age, $sexe, $region, $email, $idMat));
+            // vérifier si la requête d'insertion a réussi
+            if ($exec) {
+                $_SESSION['msg_suc'] = 'Données insérées avec succès !';
+                header("Location:prediction.php");
+            } else {
+                $msg_error = "Échec de l'opération d'insertion";
+            }
         }
-    }*/
-
-
-    
+    }
 } catch (PDOException $e) {
-    echo "Connection failed: " . $e->getMessage();
+    $msg_error = "Connection failed: " . $e->getMessage();
 }
-
-
-
-
-
-
 ?>
 
 <!DOCTYPE html>
