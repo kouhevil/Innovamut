@@ -18,10 +18,10 @@ try {
         $email = htmlspecialchars($_POST['email']);
         $password = htmlspecialchars($_POST['password']);
         $password2 = htmlspecialchars($_POST['password2']);
-        if (!empty($_POST['nom']) and !empty($_POST['prenom']) and !empty($_POST['poids']) and !empty($_POST['taille']) and !empty($_POST['age']) and !empty($_POST['region']) and !empty($_POST['email'])) {            
+        if (!empty($_POST['nom']) and !empty($_POST['prenom']) and !empty($_POST['poids']) and !empty($_POST['taille']) and !empty($_POST['age']) and !empty($_POST['region']) and !empty($_POST['email'])) {
             $idMat = null;
 
-            if($password == $password2){
+            if ($password == $password2) {
                 if ($_POST['consentement'] == true) {
                     if (empty($_POST['idMat']))
                         $msg_error = 'Si vous nous autoriser à utiliser vos données, vous devez entrez votre n° adhérent de la MATMUT !';
@@ -33,7 +33,7 @@ try {
                         $res = $conn->prepare($sql);
                         $exec = $res->execute(array($nom, $prenom, $poids, $taille, $age, $sexe, $region, $email, $idMat, $password));
                         // vérifier si la requête d'insertion a réussi
-                        var_dump('1',$exec);
+                        var_dump('1', $exec);
                         if ($exec) {
                             $_SESSION['msg_suc'] = 'Données insérées avec succès !';
                             header("Location:connexion.php");
@@ -41,8 +41,7 @@ try {
                             $msg_insert = "Échec de l'opération d'insertion";
                         }
                     }
-                }
-                else{
+                } else {
                     // Requête mysql pour insérer des données
                     $sql = "INSERT INTO `Personnes` (`nom`, `prenom`, `poids`, `taille`, `age`, `sexe`, `region`, `email`, `password`) 
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -57,8 +56,7 @@ try {
                         $msg_insert = "Échec de l'opération d'insertion";
                     }
                 }
-            }
-            else
+            } else
                 $msg_error = 'Les mots de passe ne correspondent pas !';
         } else {
             $msg_error = 'Vous devez remplir tous les champs requis !';
@@ -203,19 +201,24 @@ try {
                 <div class="mb-3 row">
                     <label for="password" class="col-sm-2 col-form-label">Mot de passe</label>
                     <div class="col-sm-10">
-                        <input type="password" class="form-control form-control-sm" id="password" name="password" placeholder="Entrez le mot de passe" >
+                        <input type="password" class="form-control form-control-sm" id="password" name="password" placeholder="Entrez le mot de passe">
                     </div>
                 </div>
 
                 <div class="mb-3 row">
                     <label for="password2" class="col-sm-2 col-form-label">Confirmer le mot de passe</label>
                     <div class="col-sm-10">
-                        <input type="password" class="form-control form-control-sm" id="password2" name="password2" placeholder="Confirmer le mot de passe" >
+                        <input type="password" class="form-control form-control-sm" id="password2" name="password2" placeholder="Confirmer le mot de passe">
                     </div>
                 </div>
 
                 <div class="mb-3 form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="consentement" name="consentement" value="true">
+                    <input class="form-check-input" type="checkbox" id="socMat" name="socMat" value="true" disabled>
+                    <label class="form-check-label" for="socMat">Cochez cette case si vous faites partir des sociétaires de la MATMUT</label>
+                </div>
+
+                <div class="mb-3 form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="consentement" name="consentement" value="true" disabled>
                     <label class="form-check-label" for="consentement">Autorisez l'application à utiliser vos données personnelles chez la MATMUT </label>
                 </div>
 
@@ -239,3 +242,21 @@ try {
 </body>
 
 </html>
+
+<script>
+    function clickSocMat() {
+        // Get the checkbox
+        var socMat = document.getElementById("socMat");
+        // Get the output text
+        var consentement = document.getElementById("consentement");
+        var idMat = document.getElementById("idMat");
+
+        // If the checkbox is checked, display the output text
+        if (socMat.checked == true) {
+            consentement.setAttribute("disabled") = false;
+            idMat.setAttribute("disabled") = false;
+        } else {
+            text.style.display = "none";
+        }
+    }
+</script>

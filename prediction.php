@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <body class="container">
     <!-- Barre de navigation -->
-    <nav class="navbar mt-2 navbar-expand-sm navbar-dark bg-dark">
+    <nav class="navbar mt-2 navbar-expand-sm navbar-dark bg-dark mb-3">
         <div class="container-sm">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -78,7 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </div>
     </nav>
 
-    <a href="logout.php" class="btn btn-outline-danger btn-sm" tabindex="-1" role="button" aria-disabled="false">Se déconnecter</a>
+    <a href="logout.php" class="btn btn-outline-danger btn-sm mt-3" tabindex="-1" role="button" aria-disabled="false">Se déconnecter</a>
 
     <?php if (isset($_SESSION['msg_suc'])) {  ?>
             <div class="container mt-3">
