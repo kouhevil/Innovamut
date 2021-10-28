@@ -10,7 +10,7 @@ try {
             $email = $_POST['email'];
             $password = $_POST['password'];
 
-            $requser = $conn->prepare("SELECT * FROM Personnes where email = ? AND password = ?");
+            $requser = $conn->prepare("SELECT * FROM `Personnes` WHERE `email`=? and `password`=?");
             $requser->execute(array($email, $password));
             $userexist = $requser->rowCount();
 
