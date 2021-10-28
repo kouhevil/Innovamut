@@ -227,7 +227,7 @@ try {
                     <div class="col-sm-10">
                         <input type="text" class="form-control form-control-sm" id="idMat" name="idMat" placeholder="Entrez votre n° adhérent de la MATMUT" value="<?php if (isset($idMat)) {
                                                                                                                                                                         echo $idMat;
-                                                                                                                                                                    } ?>">
+                                                                                                                                                                    } ?>" disabled>
                     </div>
                 </div>
 
