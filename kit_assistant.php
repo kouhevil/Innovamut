@@ -40,18 +40,11 @@
     </nav>
 
     <div class="container my-3">
-        <h1 class="h1 text-secondary">Kit assistant </h1>
-        <div class="row">
-            <div class="col-sm-12">
-
-            </div>
-        </div>
-            <div class="">
-                <p class="text-secondary">Une prédiction</p>
-                <p class="text-secondary">Une prédiction</p>
-                <p class="text-secondary">Une prédiction</p>
-                <p class="text-secondary">Une prédiction</p>
-            </div>        
+        <h1 class="h1 text-secondary mb-b">Kit assistant </h1>
+        
+        <form action="">
+            
+        </form>
     </div>
 </body>
 

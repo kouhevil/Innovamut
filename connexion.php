@@ -14,7 +14,7 @@ try {
             $requser = $conn->prepare($sql);
             $requser->execute(array($email, $password));
             $userexist = $requser->rowCount();
-            var_dump($userexist);
+            
             if ($userexist <= 0)
                 $msg_error = 'Les identifiants ne corespondent pas !';
             else {

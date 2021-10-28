@@ -1,38 +1,49 @@
 <?php
+require 'db-config.php';
 session_start();
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $nom = $_POST['nom'];
-    $prenom = $_POST['prenom'];
-    $poids = $_POST['poids'];
-    $taille = $_POST['taille'];
-    $age = $_POST['age'];
-    $sexe = $_POST['sexe'];
-    $region = $_POST['region'];
-    $email = $_POST['email'];
+$conn = new PDO($db_dsn, $db_user, $db_pass);
 
-    echo $nom . " " . $prenom . " ";
+$email = $_SESSION['email'];
+
+$sql = "SELECT * FROM `Personnes` WHERE `email`=?";
+$requser = $conn->prepare($sql);
+$requser->execute(array($email));
+$userexist = $requser->rowCount();
+
+$userinfo = $requser->fetch();
+
+    $nom = $userinfo['nom'];
+    $prenom = $userinfo['prenom'];
+    $poids = $userinfo['poids'];
+    $taille = $userinfo['taille'];
+    $age = $userinfo['age'];
+    $sexe = $userinfo['sexe'];
+    $region = $userinfo['region'];
+    $email = $userinfo['email'];
+
+    //echo $nom . " " . $prenom . " ";
 
     // Envoie de mail
     $url = 'https://innovamut-mail-server.herokuapp.com/email/sendMail';
 
     $postdata = http_build_query(
         array(
-        'nom' => $nom,
-        'prenom' => $prenom,
-        'email' => $email,
+            'nom' => $nom,
+            'prenom' => $prenom,
+            'email' => $email,
         )
     );
-    $opts = array('http' =>
+    $opts = array(
+        'http' =>
         array(
-        'method' => 'POST',
-        'header' => 'Content-type: application/x-www-form-urlencoded',
-        'content' => $postdata
+            'method' => 'POST',
+            'header' => 'Content-type: application/x-www-form-urlencoded',
+            'content' => $postdata
         )
     );
     $context = stream_context_create($opts);
     $result = file_get_contents($url, false, $context);
 
-}
 
 ?>
 <!DOCTYPE html>
@@ -74,13 +85,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <a href="logout.php" class="btn btn-outline-danger btn-sm mt-3" tabindex="-1" role="button" aria-disabled="false">Se déconnecter</a>
 
     <?php if (isset($_SESSION['msg_suc'])) {  ?>
-            <div class="container mt-3">
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <?php echo $_SESSION['msg_suc']; ?>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
+        <div class="container mt-3">
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <?php echo $_SESSION['msg_suc']; ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
-        <?php }  ?>
+        </div>
+    <?php }  ?>
 
     <div class="card container-sm my-3">
         <div class="container card-body">
@@ -117,13 +128,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             }
             if (age > 50) {
                 prediction.push(" Pensez à la Coléoscopie, et à verifier votre tension. ");
-            }else 
-            {
+            } else {
                 prediction.push(" C'est le moment ideal pour prendre un rdv avec votre dentiste ");
             }
             if (age > 25) {
                 prediction.push(" Il serait sage, de songer à faire le rappel de votre vaccin contre la coqueluche. ");
-            }else {
+            } else {
                 prediction.push(" Il serait sage, de songer à faire le rappel de votre vaccin contre la grippe ");
             }
 
@@ -136,7 +146,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         document.getElementById('prediction2').innerHTML = prediction[1];
 
         document.getElementById('prediction3').innerHTML = prediction[2];
-
     </script>
 </body>
 
