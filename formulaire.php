@@ -245,18 +245,14 @@ try {
 
 <script>
     function clickSocMat() {
-        // Get the checkbox
         var socMat = document.getElementById("socMat");
-        // Get the output text
         var consentement = document.getElementById("consentement");
         var idMat = document.getElementById("idMat");
 
-        // If the checkbox is checked, display the output text
         if (socMat.checked == true) {
-            consentement.setAttribute("disabled") = false;
-            idMat.setAttribute("disabled") = false;
-        } else {
-            text.style.display = "none";
-        }
+            consentement.setAttribute("disabled", false) ;
+            idMat.setAttribute("disabled", false);
+        } 
+            
     }
 </script>
