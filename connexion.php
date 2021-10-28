@@ -10,10 +10,11 @@ try {
             $email = $_POST['email'];
             $password = $_POST['password'];
 
-            $requser = $conn->prepare("SELECT * FROM `Personnes` WHERE `email`=? and `password`=?");
+            $sql = "SELECT * FROM `Personnes` WHERE `email`=? and `password`=?";
+            $requser = $conn->prepare($sql);
             $requser->execute(array($email, $password));
             $userexist = $requser->rowCount();
-
+            var_dump($userexist);
             if ($userexist <= 0)
                 $msg_error = 'Les identifiants ne corespondent pas !';
             else {
