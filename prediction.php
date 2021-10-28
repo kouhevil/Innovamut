@@ -1,24 +1,18 @@
 <?php
 session_start();
-$servername = "localhost";
-$username = "usr_innovamut";
-$password = "BzyKDlB9";
-$dbname = "hme_db_usr_innovamut";
+if (isset($_POST['valider'])) {
+    $nom = $_POST['nom'];
+    $prenom = $_POST['prenom'];
+    $poids = $_POST['poids'];
+    $taille = $_POST['taille'];
+    $age = $_POST['age'];
+    $sexe = $_POST['sexe'];
+    $region = $_POST['region'];
+    $email = $_POST['email'];
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-$sql = "SELECT nom, prenom, poids, taille, age FROM Personnes";
-$result = $conn->query($sql);
+    echo $nom . " " . $prenom . " ";
 
-if ($result->num_rows > 0) {
-  // output data of each row
-  while($row = $result->fetch_assoc()) {
-    echo "id: " . $row["nom"]. " - Name: " . $row["prenom"]. " " . $row["taille"]. "<br>";
-  }
-} else {
-  echo "0 results";
 }
-$conn->close();
 
 ?>
 <!DOCTYPE html>
