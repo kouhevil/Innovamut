@@ -2,12 +2,11 @@
 require 'db-config.php';
 
 try {
-    $conn = new PDO("mysql:host=$servername;dbname=$db", $username, $password, $db);
+    $conn = new PDO($db_dsn, $db_user, $db_pass);
     // set the PDO error mode to exception
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     echo "Connected successfully";
 
-    if (isset($_POST['valider'])) {
+    /*if (isset($_POST['valider'])) {
         $nom = htmlspecialchars($_POST['nom']);
         // Requête mysql pour insérer des données
         $sql = "INSERT INTO `test` VALUES (:nom)";
@@ -19,10 +18,10 @@ try {
         } else {
             echo "Échec de l'opération d'insertion";
         }
-    }
+    }*/
 
 
-    $conn == null;
+    
 } catch (PDOException $e) {
     echo "Connection failed: " . $e->getMessage();
 }
