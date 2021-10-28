@@ -1,3 +1,8 @@
+<?php 
+    require 'db-config.php';
+    session_start();
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -27,16 +32,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="index.php">Accueil</a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Assistant
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item"  aria-current="page" href="kit_assistant.php">Kit assistant</a></li>
-                            <li><a class="dropdown-item" href="#">Assistant virtuel - Chatbot</a></li>
-                        </ul>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="kit_assistant.php">Accueil</a>
                     </li>
-                </ul>
             </div>
         </div>
     </nav>
