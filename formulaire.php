@@ -213,7 +213,7 @@ try {
                 </div>
 
                 <div class="mb-3 form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="socMat" name="socMat" value="true">
+                    <input class="form-check-input" type="checkbox" id="socMat" name="socMat" value="true" onclick="clickSocMat()">
                     <label class="form-check-label" for="socMat">Cochez cette case si vous faites partir des sociétaires de la MATMUT</label>
                 </div>
 
