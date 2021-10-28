@@ -2,13 +2,19 @@
 require 'db-config.php';
 
 try {
-    $bdd = new PDO($DB_HOST, $DB_USER, $DB_PASS);
+    $conn = new PDO("mysql:host=$servername;dbname=myDB", $username, $password, $db);
+    // set the PDO error mode to exception
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    echo "Connected successfully";
+    
+    $conn == null;
+    
+} catch(PDOException $e){
+    echo "Connection failed: " . $e->getMessage();
+    }
+     
 
-    $insert_inscrit = $bdd->prepare("INSERT INTO test VALUES (?)");
-    $insert_inscrit->execute(array('ça marche'));
-} catch (PDOException $pe) {
-    $msg_error = $pe->getMessage();
-}
+    
 
 if (isset($_POST['valider'])) {
 }

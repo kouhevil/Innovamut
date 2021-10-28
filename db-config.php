@@ -1,5 +1,8 @@
 <?php
-    $DB_HOST = "mysql:host=localhost/51.178.86.41/hostme.space;dbname=hme_db_usr_innovamut";
-    $DB_USER = "usr_innovamut"; 
-    $DB_PASS = "BzyKDlB9";
+
+$servername = "localhost/51.178.86.41/hostme.space";
+$username = "usr_innovamut";
+$password = "BzyKDlB9";
+$db = "hme_db_usr_innovamut";
+
 ?>
