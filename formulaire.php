@@ -249,7 +249,7 @@ try {
         var consentement = document.getElementById("consentement");
         var idMat = document.getElementById("idMat");
 
-        if (socMat.checked == true) {
+        if (socMat.getAttribute("checked") == true) {
             consentement.setAttribute("disabled", false) ;
             idMat.setAttribute("disabled", false);
         } 
