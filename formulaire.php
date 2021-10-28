@@ -8,18 +8,17 @@ try {
     //echo "Connected successfully";
 
     if (isset($_POST['valider'])) {
-        if (!empty($_POST['nom']) and !empty($_POST['prenom']) and !empty($_POST['poids']) and !empty($_POST['taille']) and !empty($_POST['age']) and !empty($_POST['region']) and !empty($_POST['email'])) {
-            $nom = htmlspecialchars($_POST['nom']);
-            $prenom = htmlspecialchars($_POST['prenom']);
-            $poids = htmlspecialchars($_POST['poids']);
-            $taille = htmlspecialchars($_POST['taille']);
-            $age = htmlspecialchars($_POST['age']);
-            $sexe = $_POST['sexe'];
-            $region = htmlspecialchars($_POST['region']);
-            $email = htmlspecialchars($_POST['email']);
-            $password = htmlspecialchars($_POST['password']);
-            $password2 = htmlspecialchars($_POST['password2']);
-            
+        $nom = htmlspecialchars($_POST['nom']);
+        $prenom = htmlspecialchars($_POST['prenom']);
+        $poids = htmlspecialchars($_POST['poids']);
+        $taille = htmlspecialchars($_POST['taille']);
+        $age = htmlspecialchars($_POST['age']);
+        $sexe = $_POST['sexe'];
+        $region = htmlspecialchars($_POST['region']);
+        $email = htmlspecialchars($_POST['email']);
+        $password = htmlspecialchars($_POST['password']);
+        $password2 = htmlspecialchars($_POST['password2']);
+        if (!empty($_POST['nom']) and !empty($_POST['prenom']) and !empty($_POST['poids']) and !empty($_POST['taille']) and !empty($_POST['age']) and !empty($_POST['region']) and !empty($_POST['email'])) {            
             $idMat = null;
 
             if($password == $password2){
