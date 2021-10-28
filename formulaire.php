@@ -48,6 +48,7 @@ try {
                     $res = $conn->prepare($sql);
                     $exec = $res->execute(array($nom, $prenom, $poids, $taille, $age, $sexe, $region, $email, $password));
                     // vérifier si la requête d'insertion a réussi
+                    var_dump($exec);
                     if ($exec) {
                         $_SESSION['msg_suc'] = 'Données insérées avec succès !';
                         header("Location:prediction.php");
