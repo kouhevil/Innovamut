@@ -12,6 +12,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     echo $nom . " " . $prenom . " ";
 
+    // Envoie de mail
+    $url = 'https://innovamut-mail-server.herokuapp.com/email/sendMail';
+
+    $postdata = http_build_query(
+        array(
+        'nom' => $nom,
+        'prenom' => $prenom,
+        'email' => $email,
+        )
+    );
+    $opts = array('http' =>
+        array(
+        'method' => 'POST',
+        'header' => 'Content-type: application/x-www-form-urlencoded',
+        'content' => $postdata
+        )
+    );
+    $context = stream_context_create($opts);
+    $result = file_get_contents($url, false, $context);
+
 }
 
 ?>
@@ -102,9 +122,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             }
             if (age > 50) {
                 prediction.push(" Pensez à la Coléoscopie, et à verifier votre tension. ");
+            }else 
+            {
+                prediction.push(" C'est le moment ideal pour prendre un rdv avec votre dentiste ");
             }
             if (age > 25) {
                 prediction.push(" Il serait sage, de songer à faire le rappel de votre vaccin contre la coqueluche. ");
+            }else {
+                prediction.push(" Il serait sage, de songer à faire le rappel de votre vaccin contre la grippe ");
             }
 
             return prediction;
