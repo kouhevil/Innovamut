@@ -252,6 +252,7 @@ try {
         if (socMat.getAttribute("checked") == true) {
             consentement.setAttribute("disabled", false) ;
             idMat.setAttribute("disabled", false);
+            alert("okkkkkkk");
         } 
             
     }
