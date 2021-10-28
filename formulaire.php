@@ -6,18 +6,31 @@ try {
     // set the PDO error mode to exception
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     echo "Connected successfully";
-    
-    $conn == null;
-    
-} catch(PDOException $e){
-    echo "Connection failed: " . $e->getMessage();
+
+    if (isset($_POST['valider'])) {
+        $nom = htmlspecialchars($_POST['nom']);
+        // Requête mysql pour insérer des données
+        $sql = "INSERT INTO `test` VALUES (:nom)";
+        $res = $pdo->prepare($sql);
+        $exec = $res->execute(array(":nom" => $nom));
+        // vérifier si la requête d'insertion a réussi
+        if ($exec) {
+            echo 'Données insérées';
+        } else {
+            echo "Échec de l'opération d'insertion";
+        }
     }
-     
 
-    
 
-if (isset($_POST['valider'])) {
+    $conn == null;
+} catch (PDOException $e) {
+    echo "Connection failed: " . $e->getMessage();
 }
+
+
+
+
+
 
 ?>
 
