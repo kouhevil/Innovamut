@@ -112,7 +112,7 @@ try {
                 </div>
 
                 <div>
-                    <input type="button" type="submit" value="Connexion" name="connexion" class="btn btn-outline-success float-start">
+                    <input type="submit" value="Connexion" name="connexion" class="btn btn-outline-success float-start">
                 </div>
             </form>
         </div>
