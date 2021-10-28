@@ -14,7 +14,7 @@ try {
             $poids = htmlspecialchars($_POST['poids']);
             $taille = htmlspecialchars($_POST['taille']);
             $age = htmlspecialchars($_POST['age']);
-            $sexe = htmlspecialchars($_POST['sexe']);
+            $sexe = $_POST['sexe'];
             $region = htmlspecialchars($_POST['region']);
             $email = htmlspecialchars($_POST['email']);
             $idMat = null;
@@ -29,7 +29,7 @@ try {
 
             // Requête mysql pour insérer des données
             $sql = "INSERT INTO personnes ('nom', 'prenom', 'poids', 'taille', 'age', 'sexe' , 'region' , 'email' , 'idMatmut' ) VALUES (?,?,?,?,?,?,?,?)";
-            $res = $pdo->prepare($sql);
+            $res = $conn->prepare($sql);
             $exec = $res->execute(array($nom, $prenom, $poids, $taille, $age, $sexe, $region, $email, $idMat));
             // vérifier si la requête d'insertion a réussi
             if ($exec) {
