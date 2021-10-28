@@ -254,7 +254,7 @@ try {
         if (socMat.getAttribute("checked") == true) {
             mat.hidden = false;
         } else {
-            mat.hidden = false;
+            mat.hidden = true;
         }
 
     }
