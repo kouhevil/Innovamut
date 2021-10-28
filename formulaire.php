@@ -7,10 +7,8 @@ try {
     //echo "Connected successfully";
 
     if (isset($_POST['valider'])) {
-        if (empty($_POST['nom']) || empty($_POST['prenom']) || empty($_POST['poids']) || empty($_POST['taille']) || empty($_POST['age']) || empty($_POST['region']) || empty($_POST['email']))
-            $msg_error = 'Vous devez remplir tous mes champs requis !';
-
-        else {
+        if (!empty($_POST['nom']) AND !empty($_POST['prenom']) AND !empty($_POST['poids']) AND !empty($_POST['taille']) AND !empty($_POST['age']) AND !empty($_POST['region']) AND !empty($_POST['email']))
+           
             $nom = htmlspecialchars($_POST['nom']);
             $prenom = htmlspecialchars($_POST['prenom']);
             $poids = htmlspecialchars($_POST['poids']);
@@ -40,8 +38,12 @@ try {
             } else {
                 $msg_error = "Échec de l'opération d'insertion";
             }
+        } 
+
+        else {
+            $msg_error = 'Vous devez remplir tous les champs requis !';
         }
-    }
+    
 } catch (PDOException $e) {
     $msg_error = "Connection failed: " . $e->getMessage();
 }
