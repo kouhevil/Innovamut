@@ -27,9 +27,9 @@ try {
         }
         // Requête mysql pour insérer des données
         $sql = "INSERT INTO `Personnes` (`nom`, `prenom`, `poids`, `taille`, `age`, `sexe`, `region`, `email`, `numero_matmut`) 
-                    VALUES (:nom, :prenom, :poids, :taille, :age, :sexe, :region, :email, :idMat)";
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $res = $conn->prepare($sql);
-        $exec = $res->execute(array(":nom" => $nom, ":prenom" => $prenom, ":poids" => $poids, ":taille" => $taille, ":age" => $age, ":sexe" => $sexe, ":region" => $region, ":email" => $email, ":numero_matmut" => $idMat));
+        $exec = $res->execute(array($nom, $prenom, $poids, $taille, $age, $sexe, $region, $email, $idMat));
         // vérifier si la requête d'insertion a réussi
         if ($exec) {
             $_SESSION['msg_suc'] = 'Données insérées avec succès !';
