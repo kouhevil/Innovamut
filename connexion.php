@@ -19,6 +19,7 @@ try {
             else {
                 $userinfo = $requser->fetch();
                 $_SESSION['email'] = $userinfo['email'];
+                header("Location:prediction.php");
             }
         } else
             $msg_error = 'Entrez les identifiants de connexions !';
@@ -42,8 +43,8 @@ try {
 </head>
 
 <body class="mt-3 container">
-    
-    <nav class="navbar mt-2 navbar-expand-sm navbar-dark bg-dark">
+
+    <nav class="navbar mt-2 mb-3 navbar-expand-sm navbar-dark bg-dark">
         <div class="container-sm">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
