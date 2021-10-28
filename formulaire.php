@@ -217,18 +217,21 @@ try {
                     <label class="form-check-label" for="socMat">Cochez cette case si vous faites partir des sociétaires de la MATMUT</label>
                 </div>
 
-                <div class="mb-3 form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="consentement" name="consentement" value="true" hidden>
-                    <label class="form-check-label" for="consentement">Autorisez l'application à utiliser vos données personnelles chez la MATMUT </label>
-                </div>
-
-                <div class="mb-3 row">
-                    <label for="idMat" class="col-sm-2 col-form-label">N° d'adhérent MATMUT</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control form-control-sm" id="idMat" name="idMat" placeholder="Entrez votre n° adhérent de la MATMUT" value="<?php if (isset($idMat)) {
-                                                                                                                                                                        echo $idMat;
-                                                                                                                                                                    } ?>" hidden>
+                <div id="mat" hidden>
+                    <div class="mb-3 form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="consentement" name="consentement" value="true">
+                        <label class="form-check-label" for="consentement">Autorisez l'application à utiliser vos données personnelles chez la MATMUT </label>
                     </div>
+
+                    <div class="mb-3 row">
+                        <label for="idMat" class="col-sm-2 col-form-label">N° d'adhérent MATMUT</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control form-control-sm" id="idMat" name="idMat" placeholder="Entrez votre n° adhérent de la MATMUT" value="<?php if (isset($idMat)) {
+                                                                                                                                                                            echo $idMat;
+                                                                                                                                                                        } ?>">
+                        </div>
+                    </div>
+
                 </div>
 
                 <div class="mb-3">
@@ -246,17 +249,13 @@ try {
 <script>
     function clickSocMat() {
         var socMat = document.getElementById("socMat");
-        var consentement = document.getElementById("consentement");
-        var idMat = document.getElementById("idMat");
+        var mat = document.getElementById("mat");        
 
         if (socMat.getAttribute("checked") == true) {
-            consentement.hidden = false ;
-            idMat.setAttribute.hidden = false;
-            alert("okkkkkkk");
+            mat.hidden = false;
         } else {
-            consentement.hidden = false ;
-            idMat.setAttribute.hidden = false;
+            mat.hidden = false;
         }
-            
+
     }
 </script>
