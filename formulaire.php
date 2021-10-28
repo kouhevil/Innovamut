@@ -10,34 +10,33 @@ try {
         if (!empty($_POST['nom']) and !empty($_POST['prenom']) and !empty($_POST['poids']) and !empty($_POST['taille']) and !empty($_POST['age']) and !empty($_POST['region']) and !empty($_POST['email']))
 
             $nom = htmlspecialchars($_POST['nom']);
-        $prenom = htmlspecialchars($_POST['prenom']);
-        $poids = htmlspecialchars($_POST['poids']);
-        $taille = htmlspecialchars($_POST['taille']);
-        $age = htmlspecialchars($_POST['age']);
-        $sexe = $_POST['sexe'];
-        $region = htmlspecialchars($_POST['region']);
-        $email = htmlspecialchars($_POST['email']);
-        $idMat = null;
+            $prenom = htmlspecialchars($_POST['prenom']);
+            $poids = htmlspecialchars($_POST['poids']);
+            $taille = htmlspecialchars($_POST['taille']);
+            $age = htmlspecialchars($_POST['age']);
+            $sexe = $_POST['sexe'];
+            $region = htmlspecialchars($_POST['region']);
+            $email = htmlspecialchars($_POST['email']);
+            $idMat = null;
 
         if ($_POST['consentement'] == true) {
             if (empty($_POST['idMat']) || $_POST['idMat'] == null)
                 $msg_error = 'Si vous nous autoriser à utiliser vos données, vous devez entrez votre n° adhérent de la MATMUT !';
-            else 
+            else
                 $idMat = htmlspecialchars($_POST['idMat']);
-        } 
-            // Requête mysql pour insérer des données
-            $sql = "INSERT INTO personnes ('nom', 'prenom', 'poids', 'taille', 'age', 'sexe' , 'region' , 'email' , 'idMatmut' ) 
-                    VALUES (:nom, :prenom, :poids, :taille, :age, :sexe, , :region, :email, :idMat)";
-            $res = $conn->prepare($sql);
-            $exec = $res->execute(array(":nom"=>$nom, ":prenom"=>$prenom, ":poids"=>$poids, ":taille"=>$taille, ":age"=>$age, ":sexe"=>$sexe, ":region"=>$region, ":email"=>$email, ":idMatmut"=>$idMat));
-            // vérifier si la requête d'insertion a réussi
-            if ($exec) {
-                $_SESSION['msg_suc'] = 'Données insérées avec succès !';
-                header("Location:prediction.php");
-            } else {
-                $msg_insert = "Échec de l'opération d'insertion";
-            }
-        
+        }
+        // Requête mysql pour insérer des données
+        $sql = "INSERT INTO personnes ('nom', 'prenom', 'poids', 'taille', 'age', 'sexe' , 'region' , 'email' , 'idMat' ) 
+                    VALUES (:nom, :prenom, :poids, :taille, :age, :sexe, :region, :email, :idMat)";
+        $res = $conn->prepare($sql);
+        $exec = $res->execute(array(":nom" => $nom, ":prenom" => $prenom, ":poids" => $poids, ":taille" => $taille, ":age" => $age, ":sexe" => $sexe, ":region" => $region, ":email" => $email, ":idMatmut" => $idMat));
+        // vérifier si la requête d'insertion a réussi
+        if ($exec) {
+            $_SESSION['msg_suc'] = 'Données insérées avec succès !';
+            header("Location:prediction.php");
+        } else {
+            $msg_insert = "Échec de l'opération d'insertion";
+        }
     } else {
         $msg_error = 'Vous devez remplir tous les champs requis !';
     }
