@@ -111,7 +111,7 @@ try {
 
         <div class="card-body">
 
-            <form action="prediction.php" method="POST">
+            <form action="" method="POST">
                 <div class="mb-2 row">
                     <label for="nom" class="col-sm-2 col-form-label">Nom</label>
                     <div class="col-sm-10">
