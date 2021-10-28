@@ -15,7 +15,16 @@
 </head>
 
 <body>
-        
+
+    <?php if (isset($_SESSION['msg_suc'])) {  ?>
+        <div class="container mt-3">
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <?php echo $_SESSION['msg_suc']; ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+    <?php }  ?>
+
 </body>
 
 </html>

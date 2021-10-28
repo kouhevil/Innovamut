@@ -8,7 +8,6 @@ try {
 
     if (isset($_POST['valider'])) {
         if (!empty($_POST['nom']) and !empty($_POST['prenom']) and !empty($_POST['poids']) and !empty($_POST['taille']) and !empty($_POST['age']) and !empty($_POST['region']) and !empty($_POST['email'])) {
-
             $nom = htmlspecialchars($_POST['nom']);
             $prenom = htmlspecialchars($_POST['prenom']);
             $poids = htmlspecialchars($_POST['poids']);
@@ -20,7 +19,7 @@ try {
             $idMat = null;
 
             if ($_POST['consentement'] == true) {
-                if (empty($_POST['idMat']) || $_POST['idMat'] == null)
+                if (empty($_POST['idMat']))
                     $msg_error = 'Si vous nous autoriser à utiliser vos données, vous devez entrez votre n° adhérent de la MATMUT !';
                 else
                     $idMat = htmlspecialchars($_POST['idMat']);
