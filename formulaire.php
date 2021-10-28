@@ -1,5 +1,6 @@
 <?php
 require 'db-config.php';
+session_start();
 
 try {
     $conn = new PDO($db_dsn, $db_user, $db_pass);
@@ -188,6 +189,20 @@ try {
                     <label for="email" class="col-sm-2 col-form-label">Email</label>
                     <div class="col-sm-10">
                         <input type="email" class="form-control form-control-sm" id="email" name="email" placeholder="mdo@example.com" value="<?php if (isset($email)) echo $email; ?>">
+                    </div>
+                </div>
+
+                <div class="mb-3 row">
+                    <label for="password" class="col-sm-2 col-form-label">Mot de passe</label>
+                    <div class="col-sm-10">
+                        <input type="password" class="form-control form-control-sm" id="password" name="password" placeholder="Entrez le mot de passe" >
+                    </div>
+                </div>
+
+                <div class="mb-3 row">
+                    <label for="password2" class="col-sm-2 col-form-label">Confirmer le mot de passe</label>
+                    <div class="col-sm-10">
+                        <input type="password" class="form-control form-control-sm" id="password2" name="password2" placeholder="Confirmer le mot de passe" >
                     </div>
                 </div>
 
