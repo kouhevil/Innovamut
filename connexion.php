@@ -1,5 +1,27 @@
 <?php
+require 'db-config.php';
 
+try{
+    $conn = new PDO($db_dsn, $db_user, $db_pass);
+
+    if (isset($_POST['connexion'])) {
+        if (!empty($_POST['email']) and !empty($_POST['password'])) {
+            $email = $_POST['email'];
+            $password = $_POST['password'];
+
+            $requser = $conn->prepare("SELECT * FROM Personnes where pseudo = ?");
+            $requser->execute(array($pseudo));
+            $userexist = $requser->rowCount();
+
+        }
+        else
+            $msg_error = 'Entrez les identifiants de connexions !';
+    }
+}
+catch(PDOException $e){
+    $msg_error = "Connection failed: " . $e->getMessage();
+}
+    
 ?>
 
 <!DOCTYPE html>
@@ -7,7 +29,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Formulaire - Innovamut</title>
+    <title>Connexion - Innovamut</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
@@ -27,7 +49,7 @@
     <div class="mt-3 mb-3 card">
         <div class="card-body">
 
-            <form action="prediction.php" method="POST">               
+            <form action="" method="POST">               
                 <div class="mb-3 row">
                     <label for="email" class="col-sm-2 col-form-label">Email</label>
                     <div class="col-sm-10">
@@ -44,9 +66,7 @@
 
                 <div >
                     <input type="button" type="submit" value="Connexion" name="connexion" class="btn btn-outline-success float-start">
-                </div>
-
-                
+                </div>                
             </form>
         </div>
     </div>
