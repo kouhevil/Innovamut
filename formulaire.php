@@ -218,7 +218,7 @@ try {
                 </div>
 
                 <div class="mb-3 form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="consentement" name="consentement" value="true" disabled>
+                    <input class="form-check-input" type="checkbox" id="consentement" name="consentement" value="true" hidden>
                     <label class="form-check-label" for="consentement">Autorisez l'application à utiliser vos données personnelles chez la MATMUT </label>
                 </div>
 
@@ -227,7 +227,7 @@ try {
                     <div class="col-sm-10">
                         <input type="text" class="form-control form-control-sm" id="idMat" name="idMat" placeholder="Entrez votre n° adhérent de la MATMUT" value="<?php if (isset($idMat)) {
                                                                                                                                                                         echo $idMat;
-                                                                                                                                                                    } ?>" disabled>
+                                                                                                                                                                    } ?>" hidden>
                     </div>
                 </div>
 
@@ -250,10 +250,13 @@ try {
         var idMat = document.getElementById("idMat");
 
         if (socMat.getAttribute("checked") == true) {
-            consentement.setAttribute("disabled", false) ;
-            idMat.setAttribute("disabled", false);
+            consentement.hidden = false ;
+            idMat.setAttribute.hidden = false;
             alert("okkkkkkk");
-        } 
+        } else {
+            consentement.hidden = false ;
+            idMat.setAttribute.hidden = false;
+        }
             
     }
 </script>
