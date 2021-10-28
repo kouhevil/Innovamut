@@ -36,7 +36,7 @@ try {
                         var_dump('1',$exec);
                         if ($exec) {
                             $_SESSION['msg_suc'] = 'Données insérées avec succès !';
-                            header("Location:prediction.php");
+                            header("Location:connexion.php");
                         } else {
                             $msg_insert = "Échec de l'opération d'insertion";
                         }
@@ -52,7 +52,7 @@ try {
                     var_dump($exec);
                     if ($exec) {
                         $_SESSION['msg_suc'] = 'Données insérées avec succès !';
-                        header("Location:prediction.php");
+                        header("Location:connexion.php");
                     } else {
                         $msg_insert = "Échec de l'opération d'insertion";
                     }

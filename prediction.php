@@ -78,6 +78,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </div>
     </nav>
 
+    <a href="logout.php" class="btn btn-outline-danger btn-sm" tabindex="-1" role="button" aria-disabled="false">Se déconnecter</a>
+
     <?php if (isset($_SESSION['msg_suc'])) {  ?>
             <div class="container mt-3">
                 <div class="alert alert-success alert-dismissible fade show" role="alert">

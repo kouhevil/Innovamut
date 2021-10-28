@@ -1,7 +1,8 @@
 <?php
 require 'db-config.php';
+session_start();
 
-try{
+try {
     $conn = new PDO($db_dsn, $db_user, $db_pass);
 
     if (isset($_POST['connexion'])) {
@@ -9,19 +10,23 @@ try{
             $email = $_POST['email'];
             $password = $_POST['password'];
 
-            $requser = $conn->prepare("SELECT * FROM Personnes where pseudo = ?");
-            $requser->execute(array($pseudo));
+            $requser = $conn->prepare("SELECT * FROM Personnes where email = ? AND password = ?");
+            $requser->execute(array($email, $password));
             $userexist = $requser->rowCount();
 
-        }
-        else
+            if ($userexist <= 0)
+                $msg_error = 'Les identifiants ne corespondent pas !';
+            else {
+                $userinfo = $requser->fetch();
+                $_SESSION['email'] = $userinfo['email'];
+            }
+        } else
             $msg_error = 'Entrez les identifiants de connexions !';
     }
-}
-catch(PDOException $e){
+} catch (PDOException $e) {
     $msg_error = "Connection failed: " . $e->getMessage();
 }
-    
+
 ?>
 
 <!DOCTYPE html>
@@ -37,6 +42,37 @@ catch(PDOException $e){
 </head>
 
 <body class="mt-3 container">
+    
+    <nav class="navbar mt-2 navbar-expand-sm navbar-dark bg-dark">
+        <div class="container-sm">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <a class="navbar-brand disabled">
+                <img src="https://www.coover.fr/wp-content/uploads/2019/08/matmut-logo.gif" alt="https://www.coover.fr/wp-content/uploads/2019/08/matmut-logo.gif" class="rounded float-end" width="40" height="34">
+            </a>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="index.php">Accueil</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Assistant
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="kit_assistant.php">Kit assistant</a></li>
+                            <li><a class="dropdown-item" href="#">Assistant virtuel - Chatbot</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
     <div class="mb-3">
         <a href="index.php" class="btn btn-outline-warning btn-sm" tabindex="-1" role="button">Retour à l'accueil</a>
     </div>
@@ -49,7 +85,16 @@ catch(PDOException $e){
     <div class="mt-3 mb-3 card">
         <div class="card-body">
 
-            <form action="" method="POST">               
+            <?php if (isset($msg_error)) {  ?>
+                <div class="container mt-3">
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <?php echo $msg_error; ?>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                </div>
+            <?php }  ?>
+
+            <form action="" method="POST">
                 <div class="mb-3 row">
                     <label for="email" class="col-sm-2 col-form-label">Email</label>
                     <div class="col-sm-10">
@@ -60,13 +105,13 @@ catch(PDOException $e){
                 <div class="mb-3 row">
                     <label for="password" class="col-sm-2 col-form-label">Mot de passe</label>
                     <div class="col-sm-10">
-                        <input type="password" class="form-control form-control-sm" id="password" name="password" placeholder="Entrez le mot de passe" >
+                        <input type="password" class="form-control form-control-sm" id="password" name="password" placeholder="Entrez le mot de passe">
                     </div>
                 </div>
 
-                <div >
+                <div>
                     <input type="button" type="submit" value="Connexion" name="connexion" class="btn btn-outline-success float-start">
-                </div>                
+                </div>
             </form>
         </div>
     </div>

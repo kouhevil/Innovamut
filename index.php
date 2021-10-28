@@ -45,7 +45,8 @@
         <div class="container card-body">
             <div>
                 <p class="text-secondary">Bienvenue sur le carnet de santé prédictif</p>
-                <a href="connexion.php" class="btn btn-success btn-sm" tabindex="-1" role="button" aria-disabled="false">Cliquez pour commencer</a>
+                <a href="formulaire.php" class="btn btn-success btn-sm" tabindex="-1" role="button" aria-disabled="false">Cliquez ici pour s'inscrire</a>
+                <a href="connexion.php" class="btn btn-success btn-sm" tabindex="-1" role="button" aria-disabled="false">Cliquez ici pour se connecter</a>
             </div>
         </div>
     </div>
