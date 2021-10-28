@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (isset($_POST['valider'])) {
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $nom = $_POST['nom'];
     $prenom = $_POST['prenom'];
     $poids = $_POST['poids'];
