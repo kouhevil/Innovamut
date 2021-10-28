@@ -20,7 +20,7 @@ try {
         $idMat = null;
 
         if ($_POST['consentement'] == true) {
-            if (empty($_POST['idMat']) || $idMat == null)
+            if (empty($_POST['idMat']) || $_POST['idMat'] == null)
                 $msg_error = 'Si vous nous autoriser à utiliser vos données, vous devez entrez votre n° adhérent de la MATMUT !';
             else 
                 $idMat = htmlspecialchars($_POST['idMat']);
@@ -29,13 +29,13 @@ try {
             $sql = "INSERT INTO personnes ('nom', 'prenom', 'poids', 'taille', 'age', 'sexe' , 'region' , 'email' , 'idMatmut' ) 
                     VALUES (:nom, :prenom, :poids, :taille, :age, :sexe, , :region, :email, :idMat)";
             $res = $conn->prepare($sql);
-            $exec = $res->execute(array(":nom"=>$nom, ":prenom"=>$prenom, ":poids"=>$poids, ":taille"=>$age, ":sexe"=>$sexe, ":region"=>$region, ":email"=>$email, ":idMatmut"=>$idMat));
+            $exec = $res->execute(array(":nom"=>$nom, ":prenom"=>$prenom, ":poids"=>$poids, ":taille"=>$taille, ":age"=>$age, ":sexe"=>$sexe, ":region"=>$region, ":email"=>$email, ":idMatmut"=>$idMat));
             // vérifier si la requête d'insertion a réussi
             if ($exec) {
                 $_SESSION['msg_suc'] = 'Données insérées avec succès !';
                 header("Location:prediction.php");
             } else {
-                $msg_error = "Échec de l'opération d'insertion";
+                $msg_insert = "Échec de l'opération d'insertion";
             }
         
     } else {
@@ -73,6 +73,15 @@ try {
             <div class="container mt-3">
                 <div class="alert alert-warning alert-dismissible fade show" role="alert">
                     <?php echo $msg_error; ?>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
+        <?php }  ?>
+
+        <?php if (isset($msg_insert)) {  ?>
+            <div class="container mt-3">
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <?php echo $msg_insert; ?>
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             </div>
