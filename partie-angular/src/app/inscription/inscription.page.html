@@ -1,0 +1,88 @@
+<ion-content >
+
+  <div class="container">
+    <ion-card color="dark">
+      <ion-card-header>
+        <ion-card-title color="primary" size="small">Inscription</ion-card-title>
+      </ion-card-header>
+    
+      <ion-card-content>        
+          <form [formGroup]="formulaireInscription" (ngSubmit)="sinscrire()" >
+            <ion-item lines="full">
+              <ion-label position="floating">Email</ion-label>
+              <ion-input type="email" formControlName="email"></ion-input>
+            </ion-item>
+            <ion-item lines="full">
+              <ion-label position="floating">Confirmer l'e-mail</ion-label>
+              <ion-input type="email" formControlName="confirmEmail"></ion-input>
+            </ion-item>
+            <br>
+      
+            <ion-item lines="full">
+              <ion-label position="floating">Mot de passe</ion-label>
+              <ion-input type="password" formControlName="motDePasse"></ion-input>
+            </ion-item>
+            <ion-item lines="full">
+              <ion-label position="floating">Confirmer le mot de passe</ion-label>
+              <ion-input type="password" formControlName="confirmMotDePasse"></ion-input>
+            </ion-item>
+            <br>
+
+            <ion-item lines="full">
+              <ion-label position="floating">Nom</ion-label>
+              <ion-input type="text" formControlName="nom"></ion-input>
+            </ion-item>
+            <ion-item lines="full">
+              <ion-label position="floating">Prénom</ion-label>
+              <ion-input type="text" formControlName="prenom"></ion-input>
+            </ion-item>
+            <ion-item lines="full">
+              <ion-label position="floating">Numéro de téléphone</ion-label>
+              <ion-input type="text" formControlName="numeroDeTelephone"></ion-input>
+            </ion-item>
+            <br>
+
+            <ion-item lines="none">
+              <ion-label>Client MATMUT</ion-label>
+              <ion-checkbox slot="start" [value]="client_matmut" (click)="setCLientMatmut()" color="success"></ion-checkbox>
+            </ion-item>      
+            <ion-item *ngIf="client_matmut" lines="full">
+              <ion-label position="floating">Identifiant MATMUT</ion-label>
+              <ion-input type="text" formControlName="id_matmut"></ion-input>
+            </ion-item>
+            <br>
+
+            <ion-label>Recevoir les recommmandations par :</ion-label>
+            <ion-list lines="none" color="success">
+              <ion-item>
+                <ion-label>Mail</ion-label>
+                <ion-checkbox formControlName="notif_mail"></ion-checkbox>
+              </ion-item>
+              <ion-item>
+                <ion-label>Notifications</ion-label>
+                <ion-checkbox formControlName="notif_appli"></ion-checkbox>
+              </ion-item>
+              <ion-item>
+                <ion-label>Message</ion-label>
+                <ion-checkbox formControlName="notif_sms"></ion-checkbox>
+              </ion-item>
+            </ion-list>
+            <br>
+
+            <ion-row>
+              <ion-col>
+                <ion-button type="submit" color="success" size="full" [disabled]="formulaireInscription.invalid">S'INSCRIRE</ion-button>
+              </ion-col>
+            </ion-row>    
+  
+            <ion-row>
+              <ion-col>
+                <ion-button type="button" color="primary" size="small" fill="clear" (click)="seConnecter()" >Déjà inscrit ? Se connecter</ion-button>
+              </ion-col>
+            </ion-row>
+          </form>      
+      </ion-card-content>
+    </ion-card>
+  </div>
+  
+</ion-content>

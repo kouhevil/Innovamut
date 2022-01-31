@@ -1,0 +1,97 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card color="dark">
+    <ion-card-header>
+      <ion-card-title color="primary" size="small">Messages génériques</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <form [formGroup]="formulaireMessage" (ngSubmit)="envoyer()">
+
+        <ion-item>
+          <ion-label position="floating">Message</ion-label>
+          <ion-textarea formControlName="message"></ion-textarea>
+        </ion-item>
+        <br>
+
+        <ion-text style="justify-content: center;">
+          <h2>Destinataires</h2>
+        </ion-text>
+
+        <ion-item lines="full">
+          <ion-label position="floating">Poids minimale</ion-label>
+          <ion-input formControlName="poidsMin" type="number"></ion-input>
+        </ion-item>
+        <ion-item lines="full">
+          <ion-label position="floating">Poids maximale</ion-label>
+          <ion-input formControlName="poidsMax" type="number"></ion-input>
+        </ion-item>
+        <br>
+
+        <ion-item lines="full">
+          <ion-label position="floating">Taille minimale</ion-label>
+          <ion-input formControlName="tailleMin" type="number"></ion-input>
+        </ion-item>
+        <ion-item lines="full">
+          <ion-label position="floating">Taille maximale</ion-label>
+          <ion-input formControlName="tailleMax" type="number"></ion-input>
+        </ion-item>
+        <br>
+
+        <ion-item lines="full">
+          <ion-label position="floating">Age minimal</ion-label>
+          <ion-input formControlName="ageMin" type="number" min="0"></ion-input>
+        </ion-item>
+        <ion-item lines="full">
+          <ion-label position="floating">Age maximal</ion-label>
+          <ion-input formControlName="ageMax" type="number" min="0"></ion-input>
+        </ion-item>
+
+        <ion-radio-group formControlName="genre">
+          <ion-list-header>
+            <ion-label color="light" lines="full">Genre</ion-label>
+          </ion-list-header>
+          <ion-item lines="none">
+            <ion-label>Masculin</ion-label>
+            <ion-radio slot="start" value="M"></ion-radio>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-label>Féminin</ion-label>
+            <ion-radio slot="start" value="F"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+
+        <ion-item lines="none">
+          <ion-label>Region</ion-label>
+          <ion-select formControlName="region">
+            <ion-select-option *ngFor="let region of Regions; let i = index" value="{{region}}"> {{region}} </ion-select-option>
+          </ion-select>
+        </ion-item>
+        <br>        
+
+        <ion-row>
+          <ion-col>
+            <ion-button type="submit" color="success" size="full" [disabled]="formulaireMessage.invalid">Envoyer</ion-button>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <ion-button type="button" color="danger" size="full" fill="clear" (click)="clear()">Annuler</ion-button>
+          </ion-col>
+        </ion-row>
+
+      </form>
+    </ion-card-content>
+  </ion-card>
+
+
+</ion-content>

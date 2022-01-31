@@ -1,0 +1,40 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Chatbot</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <br>
+  <div class="stream container">
+    <ion-item lines="none" *ngFor="let message of messages">
+      <ion-badge text-wrap slot="start" color="dark" *ngIf="message.utilisateur">{{ message.text }}</ion-badge>
+      <ion-badge text-wrap slot="end" color="primary" *ngIf="!message.utilisateur">{{ message.text }}</ion-badge>
+    </ion-item>
+  </div>
+</ion-content>
+
+<ion-footer >
+  <form [formGroup]="formulaireMessage" (ngSubmit)="envoyer()">
+    <ion-grid class="container">
+
+      <ion-row>
+        <ion-col size="10" class="input-col">
+          <ion-input type="text" placeholder="Votre message" formControlName="message"></ion-input>
+        </ion-col>
+
+        <ion-col size="2" class="send-col">
+          <ion-button class="round icon-only" type="submit" [disabled]="formulaireMessage.invalid">
+            <ion-icon name="send-sharp"></ion-icon>
+          </ion-button>
+        </ion-col>
+
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-footer>
+
+
